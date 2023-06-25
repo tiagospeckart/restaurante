@@ -10,13 +10,14 @@ Desenvolvendo um sistema de gerenciamento de restaurante durante o módulo de Or
 
 ## Passos para realização desse projeto
 
-1. Leitura da especifição inicial
-2. Mudanças e/ou melhorias à documentação
-3. Diagramação baseada no passo 2.
-4. Implementação em Java do diagrama
+1. Leitura da [especifição inicial](https://github.com/tiagospeckart/restaurante/blob/main/Especifica%C3%A7%C3%A3o%201.0.md)
+2. Mudanças e/ou melhorias à documentação - [Especificação 2.0](https://github.com/tiagospeckart/restaurante/blob/main/Especifica%C3%A7%C3%A3o%202.0.md)
+3. [Diagramação baseada no passo 2](https://github.com/tiagospeckart/restaurante/blob/main/Diagrama.md).
+4. Implementação em Java do diagrama - **TODO**
 
 Esse processo será revisado até o ponto de aprovação pela turma, e então criaremos um Banco de Dados Relacional para interagir com as entidades
 
 ## Tech Stack
 
 - Java
+- [Mermaid.js](https://mermaid.js.org/)
