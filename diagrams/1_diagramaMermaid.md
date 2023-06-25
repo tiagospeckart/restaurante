@@ -1,57 +1,79 @@
+
 ```mermaid
 classDiagram
+	class Pessoa{
+		<<Abstract>>
+		-String nome
+		-String telefone
+		-String email
+		-String cpf
+		-Endereco endereço
+		-LocalDate dataNascimento
+		-Status status
+		-LocalDate criadoEm
+		-LocalDate alteradoEm
+		+getters() : type
+        +setters() : void
+	}
+	Pessoa *-- Endereco
+	Funcionario --|> Pessoa
+	class Cliente {
+        -String observacao
+        +Cliente()
+        +getters() : type
+        +setters() : void
+    }
+    Cliente --|> Pessoa
+    Cliente --> Status
     class Funcionario{
 	    <<Abstract>>
-        -String nome
-        -String telefone
-        -String email
-        -LocalDate dataNascimento
-        -String cpf
         -String rg
         -String escolaridade
         -integer numeroCarteiraTrabalho
         -LocalDate dataAdmissão
         -LocalDate dataDemissão
-        -status Status
-        -LocalDate criadoEm
-		-LocalDate alteradoEm
-        +getters()
-        +setters()
+        +getters() : type
+        +setters() : void
     }
     Funcionario --> Status
-    Funcionario *-- Endereco
     class Atendente{
+	    +Atendente()
+	    +processarPagamento() : void
+		+registrarCliente(Cliente) : void
+		+fecharComanda(Comanda) : void
     }
     Atendente --|> Funcionario
     Atendente .. IAtendente
     class Garcom{
+	    +Garcom()
+	    +manipularMesa(Mesa) : void
+		+criarComanda(Comanda) : void
+		+adicionarItemComanda(ItemComanda, quantidade) : void
     }
     Garcom --|> Funcionario
     Garcom .. IGarcom
     class Cozinheiro{
+	    +Cozinheiro()
+	    +atualizarStatusItem(ItemComanda) : void
     }
     Cozinheiro --|> Funcionario
     Cozinheiro .. ICozinheiro
     class Supervisor{
+	    +Supervisor()
+	    +processarPagamento() : bool
+		+registrarCliente(Cliente) : void
+		+fecharComanda(Comanda) : bool
+		+manipularMesa(Mesa) : void
+		+criarComanda(Comanda) : void
+		+adicionarItemComanda(ItemComanda, quantidade) : void
+		+adicionarFuncionario(Funcionario) : void
+		+atualizarFuncionario(Funcionario) : void
+		+removerFuncionario(Funcionario) : void
     }
     Supervisor --|> Funcionario
     Supervisor .. ISupervisor
     Supervisor .. IAtendente
     Supervisor .. IGarcom
-    class Cliente {
-        -String nome
-        -String telefone
-        -LocalDate dataNascimento
-        -String email
-        -String cpf
-        -Endereco endereço
-        -String observacao
-        -status Status
-        -LocalDate criadoEm
-		-LocalDate alteradoEm
-    }
-    Cliente --> Status
-    Cliente *-- Endereco
     class Endereco {
         -String pais
         -String estado
@@ -62,6 +84,9 @@ classDiagram
         -String cep
         -LocalDate criadoEm
 		-LocalDate alteradoEm
+		+Endereco() 
+		+getters() : type
+		+setters() : void
     }
     class Mesa {
         -Garcom garcomAtual
@@ -70,7 +95,14 @@ classDiagram
         -Integer quantidadeMaxima
         -LocalDate criadoEm
 		-LocalDate alteradoEm
+		+Mesa()
         +setGarcomMesa(Garcom)
+        + alocar(): void
+		+ reservar(): void
+		+ liberar(): void
+		+ listarClientes(): void
+		+getters() : type
+		+setters() : void
     }
     Mesa --> OcupacaoMesa
     Mesa --* Garcom
@@ -83,11 +115,14 @@ classDiagram
         -float valorTotal
         -LocalDate criadoEm
 		-LocalDate alteradoEm
+		+Comanda()
         +adicionarCliente(Cliente)
         +adicionarMesa(Mesa)
         +adicionarItemComanda(ItemComanda, quantidade) List~ItemComanda~
         +calcularTotal(List~ItemComanda~) valorTotal
         +pagarComanda() bool
+		+getters() : type
+		+setters() : void
     }
     Comanda --> StatusPagaComanda
     Mesa o-- Comanda
@@ -102,8 +137,11 @@ classDiagram
         -Status status
         -LocalDate criadoEm
 		-LocalDate alteradoEm
+		+Produto()
         +ativar()
         +desativar()
+		+getters() : type
+		+setters() : void
     }
     Produto --> Status
     class ItemComanda {
@@ -114,9 +152,12 @@ classDiagram
         -String observacao
         -LocalDate criadoEm
 		-LocalDate alteradoEm
+		+ItemComanda
         +adicionarProduto(Produto, quantidade) bool
         +mudarStatusItem(StatusPreparo) bool
         +adicionarObservacao(Observacao) bool
+		+getters() : type
+		+setters() : void
     }
     ItemComanda --> StatusItemProduto
     ItemComanda --o Produto
@@ -126,8 +167,12 @@ classDiagram
         -List~Produto~ listaProdutos
         -String codigo
         -Status status
+        +Cardapio()
+		+getters() : type
+		+setters() : void
     }
     Cardapio --> Status
+	Cardapio --o ItemProduto    
     class IAtendente {
 	    <<Interface>>
         +processarPagamento() bool

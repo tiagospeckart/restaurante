@@ -2,52 +2,71 @@
 
 ## Classes
 
-### Funcionário (superclasse abstrata)
+### Pessoa (superclasse abstrata)
 
-##### Atributos
+#### Atributos
 
 - nome : String
 - telefone : String
 - email : String
-- dataNascimento : LocalDate
 - cpf : String
-- rg : String
 - endereco : Endereco
-- escolaridade : String
-- numeroCarteiraTrabalho : integer
-- dataAdmissão: LocalDate
-- dataDemissão: LocalDate
+- dataNascimento : LocalDate
 - status : Enum Status (ATIVO/INATIVO)
 - criadoEm: LocalDate
 - alteradoEm: LocalDate
 
-### Atendente (subclasse implementa IAtendente)
+#### Métodos
+
+- getters() : type
+- setters() : void
+
+### Funcionário (subclasse de Pessoa, classe abstrata)
+
+#### Atributos
+
+- rg : String
+- escolaridade : String
+- numeroCarteiraTrabalho : integer
+- dataAdmissão: LocalDate
+- dataDemissão: LocalDate
+
+#### Métodos
+
+- getters() : type
+- setters() : void
+
+### Atendente (subclasse de Funcionario, implementa IAtendente)
 
 #### Métodos adicionais
 
+- Atendente()
 - processarPagamento() : void
 - registrarCliente(Cliente) : void
 - fecharComanda(Comanda) : void
 
 
-### Garcom (subclasse implementa IGarcom)
+### Garcom (subclasse de Funcionario, implementa IGarcom)
 
 #### Métodos adicionais
 
+- Garcom()
 - manipularMesa(Mesa) : void
 - criarComanda(Comanda) : void
 - adicionarItemComanda(ItemComanda, quantidade) : void
 
-### Cozinheiro (subclasse implementa ICozinheiro)
+### Cozinheiro (subclasse de Funcionario, implementa ICozinheiro)
 
 #### Métodos adicionais
 
+- Cozinheiro()
 - atualizarStatusItem(ItemComanda) : void
 
-### Supervisor (subclasse implementa ISupervisor, IGarcom, IAtendente)
+### Supervisor (subclasse de Funcionario, implementa ISupervisor, IGarcom, IAtendente)
 
 #### Métodos adicionais
 
+- Supervisor()
 - processarPagamento() : bool
 - registrarCliente(Cliente) : void
 - fecharComanda(Comanda) : bool
@@ -58,7 +77,7 @@
 - atualizarFuncionario(Funcionario) : void
 - removerFuncionario(Funcionario) : void
 
-### Cliente
+### Cliente (subclasse Pessoa)
 
 ##### Atributos
 
@@ -72,6 +91,12 @@
 - status : Enum Status (ATIVO/INATIVO)
 - criadoEm: LocalDate
 - alteradoEm: LocalDate
+
+#### Métodos
+
+- Cliente()
+- getters() : type
+- setters() : void
 
 ### Endereco
 
@@ -87,6 +112,12 @@
 - criadoEm: LocalDate
 - alteradoEm: LocalDate
 
+#### Métodos
+
+- Endereco()
+- getters() : type
+- setters() : void
+
 ### Mesa
 
 #### Atributos
@@ -100,7 +131,14 @@
 
 #### Métodos
 
+- Mesa()
 - setGarcomMesa(Garcom) : void
+- alocar(): void
+- reservar(): void
+- liberar(): void
+- listarClientes(): void
+- getters() : type
+- setters() : void
 
 ### Comanda
 
@@ -117,7 +155,11 @@
 
 #### Métodos
 
+- Comanda()
+- getters() : type
+- setters() : void
 - aplicarDescontoAniversario(Cliente) : valorTotal
+- fecharComanda(): void
 - adicionarItemComanda(ItemComanda, quantidade) : List<\ItemComanda>
 - calcularTotal(List<\ItemComanda>) : valorTotal
 - pagarComanda(aplicarDescontoAniversario()) : bool
@@ -138,6 +180,9 @@
 
 #### Métodos
 
+- Produto()
+- getters() : type
+- setters() : void
 - ativar()
 - desativar()
 
@@ -155,11 +200,14 @@
 
 #### Métodos
 
+- ItemComanda()
+- getters() : type
+- setters() : void
 - adicionarProduto(Produto, Quantidade) : bool
 - mudarStatusItem(StatusPreparo) : bool
 - adicionarObservacao(Observacao) : bool
 
-### Cardápio
+### Cardapio
 
 #### Atributos
 
@@ -169,6 +217,12 @@
 - Status : Enum Status (ATIVO/INATIVO)
 - criadoEm: LocalDate
 - alteradoEm: LocalDate
+
+#### Métodos
+
+- Cardapio()
+- getters() : type
+- setters() : void
 
 ## Interfaces
 
