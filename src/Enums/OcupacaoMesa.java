@@ -1,4 +1,4 @@
-package Classes;
+package Enums;
 
 public enum OcupacaoMesa {
     LIVRE,

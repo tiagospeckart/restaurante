@@ -1,5 +1,7 @@
 package Classes;
 
+import Enums.OcupacaoMesa;
+
 import java.time.LocalDate;
 public class Mesa {
     private Garcom garcomAtual;

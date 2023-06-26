@@ -1,4 +1,4 @@
-package Enums;
+package Classes;
 
 import Classes.*;
 import Interfaces.IAtendente;
