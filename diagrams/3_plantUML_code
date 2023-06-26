@@ -1,14 +1,25 @@
 @startuml
 !theme reddress-darkblue
 
+class Usuario {
+  -String codigo
+  -String login
+  -String senha
+  -Boolean ativo
+  +TipoUsuario tipoUsuario
+  +Usuario()
+	+getters() : type
+	+setters() : void
+}
+
 abstract class Pessoa {
 	-String nome
 	-String telefone
 	-String email
 	-String cpf
 	-Endereco endereço
+	-String observacao
 	-LocalDate dataNascimento
-	-Status status
 	-LocalDate criadoEm
 	-LocalDate alteradoEm
 	+getters() : type
@@ -16,55 +27,27 @@ abstract class Pessoa {
 }
 
 class Cliente {
-	-String observacao
 	+Cliente()
 	+getters() : type
 	+setters() : void
 }
 
-abstract class Funcionario {
+class Funcionario {
 	-String rg
 	-String escolaridade
-	-integer numeroCarteiraTrabalho
+	-Integer numeroCarteiraTrabalho
+	+Cargo cargo
 	-LocalDate dataAdmissão
 	-LocalDate dataDemissão
+	-LocalDate criadoEm
+	-LocalDate alteradoEm
+	+Funcionario()
 	+getters() : type
 	+setters() : void
 }
 
-class Atendente{
-	+Atendente()
-	+processarPagamento() : void
-	+registrarCliente(Cliente) : void
-	+fecharComanda(Comanda) : void
-}
-
-class Garcom {
-	+Garcom()
-	+manipularMesa(Mesa) : void
-	+criarComanda(Comanda) : void
-	+adicionarItemComanda(ItemComanda, quantidade) : void
-}
-
-class Cozinheiro {
-	+Cozinheiro()
-	+atualizarStatusItem(ItemComanda) : void
-}
-
-class Supervisor {
-	+Supervisor()
-	+processarPagamento() : bool
-	+registrarCliente(Cliente) : void
-	+fecharComanda(Comanda) : bool
-	+manipularMesa(Mesa) : void
-	+criarComanda(Comanda) : void
-	+adicionarItemComanda(ItemComanda, quantidade) : void
-	+adicionarFuncionario(Funcionario) : void
-	+atualizarFuncionario(Funcionario) : void
-	+removerFuncionario(Funcionario) : void
-}
-
 class Endereco {
+  -String codigo
 	-String pais
 	-String estado
 	-String cidade
@@ -80,49 +63,48 @@ class Endereco {
 }
 
 class Mesa {
-	-Garcom garcomAtual
+  -String codigo
+	-Funcionario garcomResponsavel
 	-Integer numero
-	-statusMesa OcupacaoMesa
+	-OcupacaoMesa statusMesa 
 	-Integer quantidadeMaxima
 	-LocalDate criadoEm
 	-LocalDate alteradoEm
 	+Mesa()
-	+setGarcomMesa(Garcom)
-	+ alocar(): void
-	+ reservar(): void
-	+ liberar(): void
-	+ listarClientes(): void
+	+setGarcomMesa(Funcionario)
+	+alocar(): void
+	+reservar(): void
+	+liberar(): void
+	+listarClientes(): void
 	+getters() : type
 	+setters() : void
 }
 
 class Comanda {
+  -String codigo
 	-Mesa mesaAtual
 	-Cliente clienteComanda
 	-List<ItemComanda> listaItemComanda
-	-statusComanda StatusPagaComanda
+	-StatusPagaComanda statusComanda
 	-String codigoComanda
-	-float valorTotal
+	-Float valorTotal
 	-LocalDate criadoEm
 	-LocalDate alteradoEm
 	+Comanda()
-	+adicionarCliente(Cliente)
-	+adicionarMesa(Mesa)
-	+adicionarItemComanda(ItemComanda, quantidade) List<ItemComanda>
-	+calcularTotal(List<ItemComanda>) valorTotal
+	+calcularTotal(List<ItemComanda>) : float
 	+pagarComanda() bool
 	+getters() : type
 	+setters() : void
 }
 
 class Produto {
+  -String codigo
 	-String nome
 	-String descricao
-	-String codigo
-	-float precoCusto
-	-float precoVenda
+	-Float precoCusto
+	-Float precoVenda
 	-Time tempoPreparo
-	-Status status
+	-Boolean ativo
 	-LocalDate criadoEm
 	-LocalDate alteradoEm
 	+Produto()
@@ -133,17 +115,16 @@ class Produto {
 }
 
 class ItemComanda {
-	-Comanda comandaVinculada
-	-Produto produtoVinculado
+	-Comanda comanda
+	-Produto produto
 	-Integer quantidade
-	-StatusItemProduto StatusPreparo
+	-StatusItemComanda statusPreparo
 	-String observacao
 	-LocalDate criadoEm
 	-LocalDate alteradoEm
-	+ItemComanda
+	+ItemComanda()
 	+adicionarProduto(Produto, quantidade) bool
 	+mudarStatusItem(StatusPreparo) bool
-	+adicionarObservacao(Observacao) bool
 	+getters() : type
 	+setters() : void
 }
@@ -152,37 +133,10 @@ class Cardapio {
 	-String nome
 	-List<Produto> listaProdutos
 	-String codigo
-	-Status status
+	-Boolean ativo
 	+Cardapio()
 	+getters() : type
 	+setters() : void
-}
-
-interface IAtendente {
-	+processarPagamento() bool
-	+registrarCliente(Cliente)
-	+fecharComanda(Comanda) bool
-}
-
-interface IGarcom {
-	+manipularMesa(Mesa)
-	+criarComanda(Comanda)
-	+adicionarItemComanda(ItemComanda, quantidade)
-}
-
-interface ICozinheiro {
-	+atualizarStatusItem(ItemComanda)
-}
-
-interface ISupervisor {
-	+adicionarFuncionario(Funcionario)
-	+atualizarFuncionario(Funcionario)
-	+removerFuncionario(Funcionario)
-}
-
-enum Status {
-	ATIVO
-	INATIVO
 }
 
 enum OcupacaoMesa {
@@ -191,7 +145,7 @@ enum OcupacaoMesa {
 	OCUPADA
 }
 
-enum StatusItemProduto {
+enum StatusItemComanda {
 	PRONTO
 	PREPARANDO
 	AGUARDANDO
@@ -203,31 +157,89 @@ enum StatusPagaComanda {
 	FECHADA
 }
 
+enum TipoUsuario {
+	ADMINISTRADOR
+	FUNCIONARIO
+	CLIENTE
+}
+
+enum Cargo {
+  FAXINEIRO
+	CAIXA
+	GARCOM
+	COZINHEIRO
+	ENTREGADOR
+	SUPERVISOR
+}
+
+interface ICrud<T> {
+  +create(obj : T) : T
+  +read(id : String) : T
+  +update(obj : T) : T
+  +delete(id : String) : void
+}
+
+interface ICrudUsuario<extends ICrud<Usuario>> {
+}
+
+interface ICrudCliente<extends ICrud<Cliente>> {
+}
+
+interface ICrudFuncionario<extends ICrud<Funcionario>> {
+}
+
+interface ICrudEndereco<extends ICrud<Endereco>> {
+}
+
+interface ICrudMesa<extends ICrud<Mesa>> {
+}
+
+interface ICrudComanda<extends ICrud<Comanda>> {
+}
+
+interface ICrudProduto<extends ICrud<Produto>> {
+}
+
+interface ICrudItemComanda<extends ICrud<ItemComanda>> {
+}
+
+interface ICrudCardapio<extends ICrud<Cardapio>> {
+}
+
+ICrud <|.. ICrudUsuario
+ICrud <|.. ICrudCliente
+ICrud <|.. ICrudFuncionario
+ICrud <|.. ICrudEndereco
+ICrud <|.. ICrudMesa
+ICrud <|.. ICrudComanda
+ICrud <|.. ICrudProduto
+ICrud <|.. ICrudItemComanda
+ICrud <|.. ICrudCardapio
+
+Usuario .. ICrudUsuario
+Cliente .. ICrudCliente
+Funcionario .. ICrudFuncionario
+Endereco .. ICrudEndereco
+Mesa .. ICrudMesa
+Comanda .. ICrudComanda
+Produto .. ICrudProduto
+ItemComanda .. ICrudItemComanda
+Cardapio .. ICrudCardapio
+
+Usuario --> TipoUsuario
+Pessoa --|> Usuario : extends
 Pessoa *-- Endereco
-Funcionario --|> Pessoa
+Funcionario --|> Pessoa : extends
+Funcionario --> Cargo
 Cliente --|> Pessoa
-Cliente --> Status
-Funcionario --> Status
-Atendente --|> Funcionario
-Atendente .. IAtendente
-Garcom --|> Funcionario
-Garcom .. IGarcom
-Cozinheiro --|> Funcionario
-Cozinheiro .. ICozinheiro
-Supervisor --|> Funcionario
-Supervisor .. ISupervisor
-Supervisor .. IAtendente
-Supervisor .. IGarcom
 Mesa --> OcupacaoMesa
-Mesa --* Garcom
 Comanda --> StatusPagaComanda
 Mesa o-- Comanda
-Cliente o-- Comanda
-Produto --> Status
-ItemComanda --> StatusItemProduto
-ItemComanda --o Produto
-ItemComanda --o Comanda
-Cardapio --> Status
-Cardapio --o Produto
+Mesa --o Funcionario
+Cliente *-- Comanda
+ItemComanda --> StatusItemComanda
+ItemComanda --* Produto
+ItemComanda --* Comanda
+Cardapio --* Produto
 
 @enduml
