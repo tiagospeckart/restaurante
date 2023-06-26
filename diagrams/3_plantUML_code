@@ -37,6 +37,8 @@ class Funcionario {
 	-String escolaridade
 	-Integer numeroCarteiraTrabalho
 	+Cargo cargo
+	-EstadoCivil estadoCivil
+	-Escolaridade escolaridade
 	-LocalDate dataAdmissão
 	-LocalDate dataDemissão
 	-LocalDate criadoEm
@@ -164,13 +166,41 @@ enum TipoUsuario {
 }
 
 enum Cargo {
-  FAXINEIRO
+  	FAXINEIRO
 	CAIXA
 	GARCOM
 	COZINHEIRO
 	ENTREGADOR
 	SUPERVISOR
 }
+
+enum EstadoCivil {
+    SOLTEIRO
+    CASADO
+    DIVORCIADO
+    VIUVO
+    SEPARADO_JUDICIALMENTE
+    UNIAO_ESTAVEL
+}
+
+enum Escolaridade {
+  EDUCACAO_INFANTIL_INCOMPLETO
+    EDUCACAO_INFANTIL_COMPLETO
+    ENSINO_FUNDAMENTAL_INCOMPLETO
+    ENSINO_FUNDAMENTAL_COMPLETO
+    ENSINO_MEDIO_INCOMPLETO
+    ENSINO_MEDIO_COMPLETO
+    ENSINO_TECNICO_INCOMPLETO
+    ENSINO_TECNICO_COMPLETO
+    ENSINO_SUPERIOR_INCOMPLETO
+    ENSINO_SUPERIOR_COMPLETO
+    POS_GRADUACAO_INCOMPLETA
+    POS_GRADUACAO_COMPLETA
+    MESTRADO_INCOMPLETO
+    MESTRADO_COMPLETO
+    DOUTORADO_INCOMPLETO
+    DOUTORADO_COMPLETO
+} 
 
 interface ICrud<T> {
   +create(obj : T) : T
@@ -231,6 +261,8 @@ Pessoa --|> Usuario : extends
 Pessoa *-- Endereco
 Funcionario --|> Pessoa : extends
 Funcionario --> Cargo
+Funcionario --> EstadoCivil
+Funcionario --> Escolaridade
 Cliente --|> Pessoa
 Mesa --> OcupacaoMesa
 Comanda --> StatusPagaComanda
