@@ -3,6 +3,10 @@
 .trash
 .obsidian
 
+# Idea #
+##############
+.idea
+
 # Código fonte compilado #
 ###################
 *.com
