@@ -1,6 +1,6 @@
-package Interfaces;
+package ravin.interfaces;
 
-import Classes.Funcionario;
+import ravin.Funcionario;
 
 public interface ISupervisor {
     void adicionarFuncionario(Funcionario funcionario);

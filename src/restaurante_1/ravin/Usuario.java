@@ -1,6 +1,6 @@
-package Classes;
+package ravin;
 
-import Interfaces.ICrudUsuario;
+import ravin.interfaces.ICrudUsuario;
 
 public class Usuario {
     private int id;

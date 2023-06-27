@@ -1,8 +1,8 @@
-package Classes;
-
-import Enums.Status;
+package ravin;
 
 import java.util.List;
+
+import ravin.enums.Status;
 
 public class Cardapio {
     private String nome;

@@ -1,6 +1,6 @@
-package Classes;
+package ravin;
 
-import Interfaces.IGarcom;
+import ravin.interfaces.IGarcom;
 
 public class Garcom extends Funcionario implements IGarcom {
     @Override

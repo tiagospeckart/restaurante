@@ -1,8 +1,8 @@
-package Interfaces;
+package ravin.interfaces;
 
-import Classes.Comanda;
-import Classes.ItemComanda;
-import Classes.Mesa;
+import ravin.Comanda;
+import ravin.ItemComanda;
+import ravin.Mesa;
 
 public interface IGarcom {
     void manipularMesa(Mesa mesa);

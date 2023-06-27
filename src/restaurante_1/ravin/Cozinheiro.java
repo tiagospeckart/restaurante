@@ -1,6 +1,6 @@
-package Classes;
+package ravin;
 
-import Interfaces.ICozinheiro;
+import ravin.interfaces.ICozinheiro;
 
 public class Cozinheiro extends Funcionario implements ICozinheiro {
     @Override

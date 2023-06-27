@@ -1,8 +1,8 @@
-package Classes;
-
-import Enums.StatusItemProduto;
+package ravin;
 
 import java.time.LocalDate;
+
+import ravin.enums.StatusItemProduto;
 public class ItemComanda {
     private Comanda comandaVinculada;
     private Produto produtoVinculado;

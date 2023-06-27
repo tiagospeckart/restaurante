@@ -1,4 +1,4 @@
-package Interfaces;
+package ravin.interfaces;
 
 public interface ICrud<T> {
     T create(T obj);

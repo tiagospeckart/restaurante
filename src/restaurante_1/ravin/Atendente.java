@@ -1,7 +1,7 @@
-package Classes;
+package ravin;
 
-import Enums.Status;
-import Interfaces.IAtendente;
+import ravin.enums.Status;
+import ravin.interfaces.IAtendente;
 
 import java.time.LocalDate;
 public class Atendente extends Funcionario implements IAtendente {

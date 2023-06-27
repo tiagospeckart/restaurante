@@ -1,9 +1,9 @@
-package Classes;
+package ravin;
 
-import Classes.*;
-import Interfaces.IAtendente;
-import Interfaces.IGarcom;
-import Interfaces.ISupervisor;
+import ravin.*;
+import ravin.interfaces.IAtendente;
+import ravin.interfaces.IGarcom;
+import ravin.interfaces.ISupervisor;
 
 public class Supervisor extends Funcionario implements ISupervisor, IAtendente, IGarcom {
     @Override

@@ -1,6 +1,6 @@
-package Interfaces;
+package ravin.interfaces;
 
-import Classes.ItemComanda;
+import ravin.ItemComanda;
 
 public interface ICozinheiro {
     void atualizarStatusItem(ItemComanda itemComanda);

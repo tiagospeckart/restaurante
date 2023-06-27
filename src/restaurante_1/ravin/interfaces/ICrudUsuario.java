@@ -1,6 +1,6 @@
-package Interfaces;
+package ravin.interfaces;
 
-import Classes.Usuario;
+import ravin.Usuario;
 
 public interface ICrudUsuario extends ICrud<Usuario> {
 	//TODO

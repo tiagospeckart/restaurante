@@ -1,8 +1,9 @@
-package Classes;
-
-import Enums.StatusPagaComanda;
+package ravin;
 
 import java.util.List;
+
+import ravin.enums.StatusPagaComanda;
+
 import java.time.LocalDate;
 public class Comanda {
     private Mesa mesaAtual;

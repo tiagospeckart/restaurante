@@ -1,5 +1,5 @@
-package Interfaces;
-import Classes.*;
+package ravin.interfaces;
+import ravin.*;
 
 public interface IAtendente {
     boolean processarPagamento();

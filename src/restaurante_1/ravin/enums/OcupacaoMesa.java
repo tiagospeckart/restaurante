@@ -1,4 +1,4 @@
-package Enums;
+package ravin.enums;
 
 public enum OcupacaoMesa {
     LIVRE,

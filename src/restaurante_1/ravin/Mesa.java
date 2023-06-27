@@ -1,8 +1,8 @@
-package Classes;
-
-import Enums.OcupacaoMesa;
+package ravin;
 
 import java.time.LocalDate;
+
+import ravin.enums.OcupacaoMesa;
 public class Mesa {
     private Garcom garcomAtual;
     private Integer numero;
