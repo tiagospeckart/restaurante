@@ -2,176 +2,203 @@
 !theme reddress-darkblue
 
 class Usuario {
-  -String codigo
-  -String login
-  -String senha
-  -Boolean ativo
-  +TipoUsuario tipoUsuario
-  +Usuario()
-	+getters() : type
-	+setters() : void
+    -int id
+    -String codigo
+    -String login
+    -String senha
+    -bool ativo
+    +TipoUsuario tipoUsuario
+
+    +Usuario()
+    +getters() : type
+    +setters() : void
 }
 
 abstract class Pessoa {
-	-String nome
-	-String telefone
-	-String email
-	-String cpf
-	-Endereco endereço
-	-String observacao
-	-LocalDate dataNascimento
-	-LocalDate criadoEm
-	-LocalDate alteradoEm
-	+getters() : type
-	+setters() : void
+    -int id
+    -String nome
+    -String telefone
+    -String email
+    -String cpf
+    -Endereco endereco
+    -String observacao
+    -LocalDate dataNascimento
+    -LocalDate criadoEm
+    -LocalDate alteradoEm
+
+    +getters() : type
+    +setters() : void
 }
 
 class Cliente {
-	+Cliente()
-	+getters() : type
-	+setters() : void
+    -int id
+    -String alergias
+    -bool vip
+
+    +Cliente()
+    +getters() : type
+    +setters() : void
 }
 
 class Funcionario {
-	-String rg
-	-String escolaridade
-	-Integer numeroCarteiraTrabalho
-	+Cargo cargo
-	-EstadoCivil estadoCivil
-	-Escolaridade escolaridade
-	-LocalDate dataAdmissão
-	-LocalDate dataDemissão
-	-LocalDate criadoEm
-	-LocalDate alteradoEm
-	+Funcionario()
-	+getters() : type
-	+setters() : void
+    -int id
+    -String rg
+    -int pis
+    -Cargo cargo
+    -EstadoCivil estadoCivil
+    -Escolaridade escolaridade
+    -LocalDate dataAdmissao
+    -LocalDate dataDemissao
+    -LocalDate criadoEm
+    -LocalDate alteradoEm
+
+    +Funcionario()
+    +getters() : type
+    +setters() : void
 }
 
 class Endereco {
-  -String codigo
-	-String pais
-	-String estado
-	-String cidade
-	-String rua
-	-Integer numero
-	-String complemento
-	-String cep
-	-LocalDate criadoEm
-	-LocalDate alteradoEm
-	+Endereco()
-	+getters() : type
-	+setters() : void
+    -int id
+    -String pais
+    -String estado
+    -String cidade
+    -String rua
+    -int numero
+    -String complemento
+    -String cep
+    -LocalDate criadoEm
+    -LocalDate alteradoEm
+
+    +Endereco()
+    +getters() : type
+    +setters() : void
 }
 
 class Mesa {
-  -String codigo
-	-Funcionario garcomResponsavel
-	-Integer numero
-	-OcupacaoMesa statusMesa 
-	-Integer quantidadeMaxima
-	-LocalDate criadoEm
-	-LocalDate alteradoEm
-	+Mesa()
-	+setGarcomMesa(Funcionario)
-	+alocar(): void
-	+reservar(): void
-	+liberar(): void
-	+listarClientes(): void
-	+getters() : type
-	+setters() : void
+    -int id
+    -String codigo
+    -Funcionario funcionarioResponsavel
+    -int numero
+    -List<Comanda> comandas
+    -OcupacaoMesa statusMesa
+    -int quantidadeMaxima
+    -LocalDate criadoEm
+    -LocalDate alteradoEm
+
+    +Mesa()
+    +alocarFuncionario() : void
+    +adicionarComanda(String codigo): void
+    +reservar(): void
+    +liberar(): void
+    +listarClientes(): void
+    +getters() : type
+    +setters() : void
+}
+
+class Pedido {
+    -int id
+    -Produto produto
+    -Timestamp dataSolicitacao
+    -Timestamp dataHoraInicioPreparo
+    -Timestamp tempoPreparoRestante
+    -StatusPreparo statusPreparo
+    -int quantidade
+    -LocalDate criadoEm
+    -LocalDate alteradoEm
+
+    +Pedido()
+    +adicionarQuantidadePedido(int quantidade) : void
+    +getters() : type
+    +setters() : void
 }
 
 class Comanda {
-  -String codigo
-	-Mesa mesaAtual
-	-Cliente clienteComanda
-	-List<ItemComanda> listaItemComanda
-	-StatusPagaComanda statusComanda
-	-String codigoComanda
-	-Float valorTotal
-	-LocalDate criadoEm
-	-LocalDate alteradoEm
-	+Comanda()
-	+calcularTotal(List<ItemComanda>) : float
-	+pagarComanda() bool
-	+getters() : type
-	+setters() : void
+    -int id
+    -String codigo
+    -Mesa mesa
+    -Cliente cliente
+    -List<Pedido> pedidos
+    -StatusPagaComanda statusComanda
+    -String codigoComanda
+    -double valorTotal
+    -LocalDate criadoEm
+    -LocalDate alteradoEm
+
+    +Comanda()
+    +adicionarPedido(Pedido pedido) : void
+    +removerPedido(String codigo) : boolean
+    +fecharComanda(String codigo) : boolean
+    +calcularTotal(String codigo) : double
+    +getters() : type
+    +setters() : void
 }
 
 class Produto {
-  -String codigo
-	-String nome
-	-String descricao
-	-Float precoCusto
-	-Float precoVenda
-	-Time tempoPreparo
-	-Boolean ativo
-	-LocalDate criadoEm
-	-LocalDate alteradoEm
-	+Produto()
-	+ativar()
-	+desativar()
-	+getters() : type
-	+setters() : void
-}
+    -int id
+    -String codigo
+    -String nome
+    -String descricao
+    -double precoCusto
+    -double precoVenda
+    -String tempoPreparo
+    -String observacoes
+    -bool ativo
+    -TipoProduto tipoProduto
+    -LocalDate criadoEm
+    -LocalDate alteradoEm
 
-class ItemComanda {
-	-Comanda comanda
-	-Produto produto
-	-Integer quantidade
-	-StatusItemComanda statusPreparo
-	-String observacao
-	-LocalDate criadoEm
-	-LocalDate alteradoEm
-	+ItemComanda()
-	+adicionarProduto(Produto, quantidade) bool
-	+mudarStatusItem(StatusPreparo) bool
-	+getters() : type
-	+setters() : void
+    +Produto()
+    +ativar()
+    +desativar()
+    +getters() : type
+    +setters() : void
 }
 
 class Cardapio {
-	-String nome
-	-List<Produto> listaProdutos
-	-String codigo
-	-Boolean ativo
-	+Cardapio()
-	+getters() : type
-	+setters() : void
+    -int id
+    -String nome
+    -String codigo
+    -List<Produto> listaProdutos
+    -CategoriaCardapio categoria
+    -bool ativo
+
+    +Cardapio()
+    +getters() : type
+    +setters() : void
 }
 
 enum OcupacaoMesa {
-	LIVRE
-	RESERVADA
-	OCUPADA
+    LIVRE
+    RESERVADA
+    OCUPADA
 }
 
-enum StatusItemComanda {
-	PRONTO
-	PREPARANDO
-	AGUARDANDO
+enum StatusPreparo {
+    PRONTO
+    PREPARANDO
+    AGUARDANDO
+    CONFIRMADO
 }
 
 enum StatusPagaComanda {
-	ABERTA
-	PAGA
-	FECHADA
+    ABERTA
+    PAGA
+    FECHADA
 }
 
 enum TipoUsuario {
-	ADMINISTRADOR
-	FUNCIONARIO
-	CLIENTE
+    ADMINISTRADOR
+    FUNCIONARIO
+    CLIENTE
 }
 
 enum Cargo {
-  	FAXINEIRO
-	CAIXA
-	GARCOM
-	COZINHEIRO
-	ENTREGADOR
-	SUPERVISOR
+    FAXINEIRO
+    CAIXA
+    GARCOM
+    COZINHEIRO
+    ENTREGADOR
+    GERENTE
 }
 
 enum EstadoCivil {
@@ -184,7 +211,7 @@ enum EstadoCivil {
 }
 
 enum Escolaridade {
-  EDUCACAO_INFANTIL_INCOMPLETO
+    EDUCACAO_INFANTIL_INCOMPLETO
     EDUCACAO_INFANTIL_COMPLETO
     ENSINO_FUNDAMENTAL_INCOMPLETO
     ENSINO_FUNDAMENTAL_COMPLETO
@@ -200,41 +227,36 @@ enum Escolaridade {
     MESTRADO_COMPLETO
     DOUTORADO_INCOMPLETO
     DOUTORADO_COMPLETO
-} 
+}
+
+enum TipoProduto {
+    LANCHE
+    BEBIDA
+    SOBREMESA
+}
+
+enum CategoriaCadapio{
+    LANCHE
+    BEBIDA
+    SOBREMESA
+}
 
 interface ICrud<T> {
-  +create(obj : T) : T
-  +read(id : String) : T
-  +update(obj : T) : T
-  +delete(id : String) : void
+    +create(obj : T) : T
+    +read(id : String) : T
+    +update(obj : T) : T
+    +delete(id : String) : void
 }
 
-interface ICrudUsuario<extends ICrud<Usuario>> {
-}
-
-interface ICrudCliente<extends ICrud<Cliente>> {
-}
-
-interface ICrudFuncionario<extends ICrud<Funcionario>> {
-}
-
-interface ICrudEndereco<extends ICrud<Endereco>> {
-}
-
-interface ICrudMesa<extends ICrud<Mesa>> {
-}
-
-interface ICrudComanda<extends ICrud<Comanda>> {
-}
-
-interface ICrudProduto<extends ICrud<Produto>> {
-}
-
-interface ICrudItemComanda<extends ICrud<ItemComanda>> {
-}
-
-interface ICrudCardapio<extends ICrud<Cardapio>> {
-}
+interface ICrudUsuario<extends ICrud<Usuario>> {}
+interface ICrudCliente<extends ICrud<Cliente>> {}
+interface ICrudFuncionario<extends ICrud<Funcionario>> {}
+interface ICrudEndereco<extends ICrud<Endereco>> {}
+interface ICrudMesa<extends ICrud<Mesa>> {}
+interface ICrudComanda<extends ICrud<Comanda>> {}
+interface ICrudProduto<extends ICrud<Produto>> {}
+interface ICrudPedido<extends ICrud<Pedido>> {}
+interface ICrudCardapio<extends ICrud<Cardapio>> {}
 
 ICrud <|.. ICrudUsuario
 ICrud <|.. ICrudCliente
@@ -243,7 +265,7 @@ ICrud <|.. ICrudEndereco
 ICrud <|.. ICrudMesa
 ICrud <|.. ICrudComanda
 ICrud <|.. ICrudProduto
-ICrud <|.. ICrudItemComanda
+ICrud <|.. ICrudPedido
 ICrud <|.. ICrudCardapio
 
 Usuario .. ICrudUsuario
@@ -253,12 +275,12 @@ Endereco .. ICrudEndereco
 Mesa .. ICrudMesa
 Comanda .. ICrudComanda
 Produto .. ICrudProduto
-ItemComanda .. ICrudItemComanda
+Pedido .. ICrudPedido
 Cardapio .. ICrudCardapio
 
 Usuario --> TipoUsuario
 Pessoa --|> Usuario : extends
-Pessoa *-- Endereco
+Pessoa o-- Endereco
 Funcionario --|> Pessoa : extends
 Funcionario --> Cargo
 Funcionario --> EstadoCivil
@@ -267,11 +289,13 @@ Cliente --|> Pessoa
 Mesa --> OcupacaoMesa
 Comanda --> StatusPagaComanda
 Mesa o-- Comanda
-Mesa --o Funcionario
-Cliente *-- Comanda
-ItemComanda --> StatusItemComanda
-ItemComanda --* Produto
-ItemComanda --* Comanda
-Cardapio --* Produto
+Mesa o-- Funcionario
+Cliente --o Comanda
+Pedido --> StatusPreparo
+Pedido --* Comanda
+Produto --o Cardapio 
+Produto --> TipoProduto
+Produto --o Pedido
+Cardapio --> CategoriaCadapio
 
 @enduml
