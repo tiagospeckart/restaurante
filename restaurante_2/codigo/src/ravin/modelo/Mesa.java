@@ -1,9 +1,9 @@
-package ravin;
+package ravin.modelo;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import ravin.enums.StatusMesa;
+import ravin.enumeradores.StatusMesa;
 
 public class Mesa {
 

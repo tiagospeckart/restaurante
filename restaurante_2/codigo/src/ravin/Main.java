@@ -1,41 +1,105 @@
 package ravin;
 
+import java.awt.GridLayout;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import ravin.enums.*;
-import java.util.*;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import ravin.enumeradores.Cargo;
+import ravin.enumeradores.CategoriaCardapio;
+import ravin.enumeradores.Disponibilidade;
+import ravin.enumeradores.Escolaridade;
+import ravin.enumeradores.EstadoCivil;
+import ravin.enumeradores.StatusComanda;
+import ravin.enumeradores.StatusMesa;
+import ravin.enumeradores.StatusPreparo;
+import ravin.enumeradores.TipoProduto;
+import ravin.modelo.Cardapio;
+import ravin.modelo.Cliente;
+import ravin.modelo.Comanda;
+import ravin.modelo.Funcionario;
+import ravin.modelo.Mesa;
+import ravin.modelo.Pedido;
+import ravin.modelo.Pessoa;
+import ravin.modelo.Produto;
 
 public class Main {
+
 	public static void main(String[] args) {
-		cadastrarPessoa();
-		cadastrarFuncionario();
-		cadastrarCliente();
-		cadastrarCardapio();
-		cadastrarProduto();
-		cadastrarPedido();
-		cadastrarComanda();
-		cadastrarMesa();
+		
+		Pessoa pessoa = cadastrarPessoa();
+		Funcionario funcionario = cadastrarFuncionario();
+		Cliente cliente = cadastrarCliente();
+		Cardapio cardapio = cadastrarCardapio();
+		Produto produto = cadastrarProduto();
+		Pedido pedido = cadastrarPedido();
+		Comanda comanda = cadastrarComanda();
+		Mesa mesa = cadastrarMesa();
 	}
 	
 	public static Pessoa cadastrarPessoa() {
-		int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o Id"));
-		String nome = JOptionPane.showInputDialog("Digite o nome da pessoa");
-		String telefone = JOptionPane.showInputDialog("Digite o telefone");
-		String email = JOptionPane.showInputDialog("Digite o email");
-		String cpf = JOptionPane.showInputDialog("Digite o CPF");
-		String endereco = JOptionPane.showInputDialog("Digite o endereco");
-		String observacao = JOptionPane.showInputDialog("Digite alguma observação");
-		
-		String dataNascimentoStr = JOptionPane.showInputDialog("Digite a data de nascimento (formato YYYY-MM-DD)");
-		LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr);
-		
-		LocalDate criadoEm = LocalDate.now();
-		LocalDate alteradoEm = LocalDate.now();
-		
-		Pessoa pessoa = new Pessoa(id, nome, telefone, email, cpf, endereco, observacao, dataNascimento, criadoEm, alteradoEm);
-		
-		return pessoa;
+	    JPanel panel = new JPanel(new GridLayout(0, 1));
+	    
+	    JTextField idField = new JTextField();
+	    panel.add(new JLabel("Digite o Id:"));
+	    panel.add(idField);
+	    
+	    JTextField nomeField = new JTextField();
+	    panel.add(new JLabel("Digite o nome da pessoa:"));
+	    panel.add(nomeField);
+	    
+	    JTextField telefoneField = new JTextField();
+	    panel.add(new JLabel("Digite o telefone:"));
+	    panel.add(telefoneField);
+
+	    JTextField emailField = new JTextField();
+	    panel.add(new JLabel("Digite o email:"));
+	    panel.add(emailField);
+	    
+	    JTextField cpfField = new JTextField();
+	    panel.add(new JLabel("Digite o CPF:"));
+	    panel.add(cpfField);
+
+	    JTextField enderecoField = new JTextField();
+	    panel.add(new JLabel("Digite o endereco:"));
+	    panel.add(enderecoField);
+	    
+	    JTextField observacaoField = new JTextField();
+	    panel.add(new JLabel("Digite alguma observação:"));
+	    panel.add(observacaoField);
+	    
+	    JTextField dataNascimentoField = new JTextField();
+	    panel.add(new JLabel("Digite a data de nascimento (formato YYYY-MM-DD):"));
+	    panel.add(dataNascimentoField);
+	    
+	    int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Pessoa",
+	        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+	        
+	    if (result == JOptionPane.OK_OPTION) {
+	        int id = Integer.parseInt(idField.getText());
+	        String nome = nomeField.getText();
+	        String telefone = telefoneField.getText();
+	        String email = emailField.getText();
+	        String cpf = cpfField.getText();
+	        String endereco = enderecoField.getText();
+	        String observacao = observacaoField.getText();
+	        LocalDate dataNascimento = LocalDate.parse(dataNascimentoField.getText());
+	        LocalDate criadoEm = LocalDate.now();
+	        LocalDate alteradoEm = LocalDate.now();
+	        
+	        Pessoa pessoa = new Pessoa(id, nome, telefone, email, cpf, endereco, observacao, dataNascimento, criadoEm, alteradoEm);
+	        
+	        return pessoa;
+	    } else {
+	        System.out.println("Cadastro cancelado");
+	        return null;
+	    }
 	}
 	
 	public static Funcionario cadastrarFuncionario() {

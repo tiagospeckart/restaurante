@@ -1,4 +1,4 @@
-package ravin.enums;
+package ravin.enumeradores;
 
 public enum EstadoCivil {
 	SOLTEIRO,

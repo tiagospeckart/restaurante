@@ -1,9 +1,9 @@
-package ravin;
+package ravin.modelo;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import ravin.enums.StatusPreparo;
+import ravin.enumeradores.StatusPreparo;
 
 public class Pedido {
 	

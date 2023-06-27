@@ -1,7 +1,11 @@
-package ravin;
+package ravin.modelo;
 
-import ravin.enums.*;
 import java.time.LocalDate;
+
+import ravin.enumeradores.Cargo;
+import ravin.enumeradores.Disponibilidade;
+import ravin.enumeradores.Escolaridade;
+import ravin.enumeradores.EstadoCivil;
 
 public class Funcionario extends Pessoa {
     

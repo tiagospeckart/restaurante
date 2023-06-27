@@ -1,8 +1,8 @@
-package ravin;
+package ravin.modelo;
 
 import java.time.LocalDate;
 
-import ravin.enums.*;
+import ravin.enumeradores.TipoProduto;
 
 public class Produto {
 	

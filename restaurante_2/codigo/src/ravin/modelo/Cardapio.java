@@ -1,8 +1,9 @@
-package ravin;
+package ravin.modelo;
 
 import java.time.LocalDate;
 import java.util.List;
-import ravin.enums.*;
+
+import ravin.enumeradores.CategoriaCardapio;
 
 public class Cardapio {
 	private int id;

@@ -1,9 +1,9 @@
-package ravin;
+package ravin.modelo;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import ravin.enums.StatusComanda;
+import ravin.enumeradores.StatusComanda;
 
 public class Comanda {
 	

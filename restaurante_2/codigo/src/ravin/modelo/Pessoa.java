@@ -1,4 +1,4 @@
-package ravin;
+package ravin.modelo;
 
 import java.time.LocalDate;
 
